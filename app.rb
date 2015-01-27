@@ -7,6 +7,7 @@ require("pry")
 require("./lib/employee")
 require("./lib/division")
 require("./lib/project")
+require("./lib/contribution")
 
 get("/") do
   erb(:index)

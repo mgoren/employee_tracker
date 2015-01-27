@@ -6,6 +6,7 @@ require('pry')
 require('./lib/employee')
 require('./lib/division')
 require('./lib/project')
+require('./lib/contribution')
 
 RSpec.configure do |config|
   config.after(:each) do
@@ -17,6 +18,9 @@ RSpec.configure do |config|
     end
     Project.all().each() do |project|
       project.destroy()
+    end
+    Contribution.all().each() do |contribution|
+      contribution.destroy()
     end
   end
 end

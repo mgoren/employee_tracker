@@ -1,0 +1,48 @@
+<% employee = Employee.find(@employee_id) %>
+<h1>
+  <%= employee.name() %>
+  <% if employee.division() %>
+    <small>
+      (<a href="/divisions/<%= employee.division().id() %>"><%= employee.division().name() %> division</a>)
+    </small>
+  <% end %>
+</h1>
+
+<p>Current Projects:</p>
+<ul>
+<% employee.projects().not_done().each() do |project| %>
+  <li><a href="/projects/<%= project.id() %>"><%= project.name() %></a></li>
+<% end %>
+</ul>
+
+<p>Past Projects:</p>
+<ul>
+<% employee.projects().done().each() do |project| %>
+  <li><a href="/projects/<%= project.id() %>"><%= project.name() %></a></li>
+<% end %>
+</ul>
+
+
+<form action="/projects" method="POST">
+  <input class="hidden" name="employee_id" value="<%= @employee_id %>">
+
+  <% if Project.all().not_done().any?() %>
+    <div class="form-group">
+      <label class="form-label" for="project_id">Assign project</label>
+      <select class="form-control" id="project_id" name="project_id">
+        <option value='' selected disabled style='display:none'>Please Choose</option>
+        <% Project.all().not_done().each() do |project| %>
+          <option value = <%= project.id() %>><%= project.name() %></option>
+        <% end %>
+      </select>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <label class="form-label" for="new_project">Assign new project:</label>
+    <input class="form-control" id="new_project" name="new_project" type="text">
+  </div>
+  <button type="submit" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tree-conifer"></span>Assign project</button>
+</form>
+
+<hr>
+<a href="/" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-fire"></span> Back</a>

@@ -1,0 +1,14 @@
+<h2>Divisions:</h2>
+<ul>
+<% Division.all().each() do |division| %>
+  <li><a href="/divisions/<%= division.id() %>"><%= division.name() %></a></li>
+<% end %>
+</ul>
+
+<form action="/divisions" method="POST">
+  <label class="form-label" for="name">Add Division</label>
+  <input class="form-control" id="name" name="name" type="text" autofocus>
+  <button type="submit" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tree-conifer"></span>Add Division</button>
+</form>
+<hr>
+<a href="/" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-fire"></span> Back</a>

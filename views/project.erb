@@ -1,0 +1,23 @@
+<% project = Project.find(@project_id) %>
+<h1>
+Project: <%= project.name() %>
+<br>
+<small>
+Currently assigned to:<br>
+<% project.employees().each() do |employee| %>
+  <%= employee.name() %><br>
+<% end %>
+
+</small>
+</h1>
+
+<% if ! project.done() %>
+  <form action="/projects" method="POST">
+    <input name="_method" type="hidden" value="patch">
+    <input type="hidden" name="project_id" value="<%= @project_id %>">
+    <button type="submit" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tree-conifer"></span> Mark as completed</button>
+  </form>
+<% end %>
+
+<hr>
+<a href="/" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-fire"></span> Back</a>

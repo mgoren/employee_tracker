@@ -1,0 +1,28 @@
+<% division = Division.find(@division_id) %>
+<h1><%= division.name() %></h1>
+
+<ul>
+<% division.employees().each() do |employee| %>
+  <li><%= employee.name() %></li>
+<% end %>
+</ul>
+
+<% if Division.any?() %>
+
+  <form action="/employees" method="POST">
+    <input type="hidden" name="division_id" value="<%= @division_id %>">
+    <input name="_method" type="hidden" value="patch">
+      <div class="form-group">
+        <label class="form-label" for="employee_id">Add employee to this division</label>
+        <select class="form-control" id="employee_id" name="employee_id">
+          <% Employee.all().each() do |employee| %>
+            <option value = <%= employee.id() %>><%= employee.name() %></option>
+          <% end %>
+        </select>
+    <button type="submit" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tree-conifer"></span>Add Employee</button>
+  </form>
+
+<% end %>
+
+<hr>
+<a href="/" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-fire"></span> Back</a>

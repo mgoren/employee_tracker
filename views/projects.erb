@@ -1,0 +1,14 @@
+<h2>Projects:</h2>
+<ul>
+<% Project.all().each() do |project| %>
+  <li><a href="/projects/<%= project.id() %>"><%= project.name() %></a>
+
+  <% if project.done() %>
+     (completed)
+  <% end %>
+  </li>
+<% end %>
+</ul>
+
+<hr>
+<a href="/" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-fire"></span> Back</a>

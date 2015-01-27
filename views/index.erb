@@ -1,0 +1,26 @@
+<h2>Employees:</h2>
+<ul>
+<% Employee.all().each() do |employee| %>
+  <li><a href="/employees/<%= employee.id() %>"><%= employee.name() %></a></li>
+<% end %>
+</ul>
+
+<form action="/employees" method="POST">
+  <div class="form-group">
+    <label class="form-label" for="name">Add Employee</label>
+    <input class="form-control" id="name" name="name" type="text" autofocus>
+  </div>
+  <% if Division.any?() %>
+    <div class="form-group">
+      <label class="form-label" for="division_id">Select Division</label>
+      <select class="form-control" id="division_id" name="division_id">
+        <% Division.all().each() do |division| %>
+          <option value = <%= division.id() %>><%= division.name() %></option>
+        <% end %>
+      </select>
+    </div>
+  <% end %>
+  <button type="submit" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-tree-conifer"></span>Add Employee</button>
+</form>
+<hr>
+<a href="/divisions">View Divisions</a>
